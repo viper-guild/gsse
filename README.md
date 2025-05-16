@@ -197,4 +197,24 @@ print(json_map)
 <summary><strong>📦 Module: <code>lists</code></strong></summary>
 <br>
 
+<details>
+<summary><strong><code>clean(myList)</code></strong></summary>
+<br>
+
+Removes empty strings from a list.
+
+#### **Parameters**
+- `myList` *(list)*: The that needs to be cleaned.
+
+#### **Returns**
+- *(list)*: The cleaned list.
+
+#### **Example**
+```lua
+cleanList = myList.clean
+cleanList = clean(myList)
+print(cleanList)
+```
+</details>
+
 </details>
