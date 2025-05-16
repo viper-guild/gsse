@@ -147,3 +147,47 @@ print("The current user is: "+user)
 ```
 </details>
 </details>
+
+
+<details>
+<summary><strong>📦 Module: <code>Json</code></strong></summary>
+<br>
+
+<details>
+<summary><strong><code>Json.dump(json)</code></strong></summary>
+<br>
+
+Converts the map into a json string
+
+#### **Parameters**
+- `json` *(map)*: The map to convert into a json string.
+
+#### **Returns**
+- *(string)*: The json string from the map.
+
+#### **Example**
+```lua
+json_string = Json.dump({"key":"value"})
+print(json_string)
+```
+</details>
+
+<details>
+<summary><strong><code>Json.loads(json)</code></strong></summary>
+<br>
+
+Converts the json string into a map
+
+#### **Parameters**
+- `json` *(string)*: The string to convert into a map.
+
+#### **Returns**
+- *(string)*: The map from the json string.
+
+#### **Example**
+```lua
+json_map = Json.loads("{""key"":""value""}")
+print(json_map)
+```
+</details>
+</details>
