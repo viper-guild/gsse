@@ -191,3 +191,10 @@ print(json_map)
 ```
 </details>
 </details>
+
+
+<details>
+<summary><strong>📦 Module: <code>lists</code></strong></summary>
+<br>
+
+</details>
