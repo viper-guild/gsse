@@ -12,7 +12,6 @@ A bundle with all of the scripts in one file is located inside the build folder.
 <summary><strong>📦 Module: <code>Crypto</code></strong></summary>
 <br>
 
-
 <details>
 <summary><strong><code>Crypto.b64encode(text)</code></strong></summary>
 <br>
@@ -91,6 +90,60 @@ Encrypts or decrypts a string with aes128.
 ciphertext = Crypto.aes128("encrypt", password, text)
 decrypted = Crypto.aes128("decrypt", password, ciphertext)
 print(decrypted)
+```
+</details>
+</details>
+
+
+<details>
+<summary><strong>📦 Module: <code>files</code></strong></summary>
+<br>
+
+
+<details>
+<summary><strong><code>getFile(object, path)</code></strong></summary>
+<br>
+
+Gets a file object from another object.
+
+#### **Parameters**
+- `object` *(object)*: This object is used to obtain the file object.
+  - `file`: Gets a file object from another file object.
+  - `computer`: Gets a file object from a computer object.
+  - `ftpShell`: Gets a file object from an ftpShell object.
+  - `shell`: Gets a file object from a shell object.
+- `path` *(string)*: The path of the file object to obtain.
+
+#### **Returns**
+- *(object)*|*(null)*: The file object from the specified path or null on error.
+
+#### **Example**
+```lua
+passwd_object = getFile(result, "/etc/passwd")
+print(passwd_object.get_content)
+```
+</details>
+
+<details>
+<summary><strong><code>getUser(object)</code></strong></summary>
+<br>
+
+Returns the user that owns the object.
+
+#### **Parameters**
+- `object` *(object)*: This object is used to obtain the file object.
+  - `file`: Gets a file object from another file object.
+  - `computer`: Gets a file object from a computer object.
+  - `ftpShell`: Gets a file object from an ftpShell object.
+  - `shell`: Gets a file object from a shell object.
+
+#### **Returns**
+- *(string)*: The owner of the object.
+
+#### **Example**
+```lua
+user = getUser(result)
+print("The current user is: "+user)
 ```
 </details>
 </details>
