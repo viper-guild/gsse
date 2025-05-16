@@ -243,7 +243,7 @@ Json.dump=function(json,c=1,i=0)
 	if json isa map then return self.map_to_JSON(json,c,i)
 end function
 
-// Converts the json string map
+// Converts the json string into a map
 // @param {string}
 // @return {map}
 // @example Json.loads("{""key"":""value""}")
