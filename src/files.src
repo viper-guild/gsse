@@ -1,7 +1,7 @@
-// Returns a file object from path
+// Returns a file object from path or null on error
 // @param {shell|ftpShell|computer|file}
 // @param {string}
-// @return {file}
+// @return {file|null}
 // @example getFile(file, "/etc/passwd")
 getFile = function(object, path)
     if typeof(object) == "shell" or typeof(object) == "ftpshell" then object = host_computer(object).File("/")
@@ -27,7 +27,7 @@ getFile = function(object, path)
     end for
 end function
 
-// Returns the currently active user
+// Returns the owner of the object
 // @param {file}
 // @return {string}
 // @example getUser(file)
