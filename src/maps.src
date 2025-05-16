@@ -1,0 +1,9 @@
+// Returns 1 if map has a value else return 0
+// @param {map}
+// @return {number}
+// @example if myMap.hasvalue(3) then print("Map has value!")
+// @example hasvalue(myMap, 3)
+map.hasvalue = function(self, item)
+    return self.indexOf(item) != null
+end function
+hasvalue = @map.hasvalue

@@ -1,0 +1,43 @@
+// Returns a file object from path
+// @param {shell|ftpShell|computer|file}
+// @param {string}
+// @return {file}
+// @example getFile(file, "/etc/passwd")
+getFile = function(object, path)
+    if typeof(object) == "shell" or typeof(object) == "ftpshell" then object = host_computer(object).File("/")
+    if typeof(object) == "computer" then object = object.File("/")
+    if path == null then return
+
+    inputFolders = path.split("/")[:-1]
+    inputFile = path.split("/")[-1]
+    while object.parent
+        object = object.parent
+    end while
+    if path == "/" then return object
+    for inputFolder in inputFolders
+        for folder in object.get_folders
+            if folder.name == inputFolder then
+                object = folder
+                break
+            end if
+        end for
+    end for
+    for file in object.get_folders+object.get_files
+        if file.name == inputFile then return file
+    end for
+end function
+
+// Returns the currently active user
+// @param {file}
+// @return {string}
+// @example getUser(file)
+getUser = function(object) // needs tweaking
+    file = getFile(object, "/")
+    if file.has_permission("w") then return "root"
+    file = getFile(object, "/home")
+    if not file then return "unknown"
+    for homeFolder in file.get_folders()
+        if homeFolder.has_permission("w") then return homeFolder.owner()
+    end for
+    return "unknown"
+end function

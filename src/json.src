@@ -1,0 +1,253 @@
+//json Parser
+//josn.loads(file.get_content) //will load a json text file into a map
+//json.dump(map) //will convert the map to json string
+
+Json={"classID":"json","hex_digit_map":{},"escape_to":["\\","\""","\b","\t","\n","\f","\r"],"eol":char(13),"escape_from":["\\","""",char(8),char(9),char(10),char(12),char(13)],"escape_indexes":0,"white_space":" "+char(9)+char(10)+char(13),"source":"","source_len":0,"p":0}
+Json.hex_to_int=function(s)
+	r=0
+	for c in s
+		r=r*16+self.hex_digit_map[c]
+	end for
+	return r
+end function
+Json.escape=function(s)
+	escape_indexes = self.escape_from.indexes
+	for i in escape_indexes
+		s=s.replace(self.escape_from[i],self.escape_to[i])
+	end for
+	return s
+end function
+Json.unescape=function(s)
+	r=[]
+	for i in range(0,15)
+		if i<10 then
+			self.hex_digit_map[str(i)]=i
+		else
+			self.hex_digit_map[char(55+i)]=i
+			self.hex_digit_map[char(87+i)]=i
+		end if
+	end for
+	i=0
+	m=s.len
+	while i<m
+		d=1
+		if s[i]=="\" then
+			d=2
+			c=s[i+1]
+			if c=="b" then
+				r.push char(8)
+				i=i+d
+				continue
+			end if
+			if c=="t" then
+				r.push char(9)
+				i=i+d
+				continue
+			end if
+			if c=="n" then
+				r.push char(10)
+				i=i+d
+				continue
+			end if
+			if c=="f" then
+				r.push char(12)
+				i=i+d
+				continue
+			end if
+			if c=="r" then
+				r.push char(13)
+				i=i+d
+				continue
+			end if
+			if c=="u" then
+				h=s[i+2:i+6]
+				r.push char(self.hex_to_int(h))
+				d=6
+				i=i+d
+				continue
+			end if
+			r.push c
+		else
+			r.push s[i]
+		end if
+		i=i+d
+	end while
+	return r.join("")
+end function
+Json.init=function(s)
+	self.source=s
+	self.source_len=s.len
+end function
+Json.parse=function(s=null)
+	if s!=null then self.init s
+	if s[0] != "{" then return null
+	self.p=0
+	parsed = self.parse_element
+	if self.p < s.len then return null else return parsed
+end function
+Json.skip_white_space=function
+	while self.p<self.source_len
+		c = self.source[self.p]
+		if self.white_space.indexOf(c)==null then break
+		self.p=self.p+1
+	end while
+end function
+Json.parse_element=function
+	return self.parse_value
+end function
+Json.parse_value=function
+	self.skip_white_space
+	if not self.source.hasIndex(self.p) then return 0
+	c=self.source[self.p]
+	if c=="[" then return self.parse_list
+	if c=="{" then return self.parse_map
+	if c=="t" and self.source[self.p:self.p+4]=="true" then
+		self.p=self.p+4
+		return true
+	end if
+	if c=="f" and self.source[self.p:self.p+5]=="false" then
+		self.p=self.p+5
+		return false
+	end if
+	if c=="n" and self.source[self.p:self.p+4]=="null" then
+		self.p=self.p+4
+		return null
+	end if
+	if c=="""" then return self.parse_string
+	if "0123456789-.".indexOf(c)!=null then return self.parse_number
+	return null
+end function
+Json.parse_list=function
+	self.p=self.p+1
+	self.skip_white_space
+	r=[]
+	while self.p<self.source_len
+		c=self.source[self.p]
+		if c=="]" then break
+		r.push self.parse_element
+		self.skip_white_space
+		c=self.source[self.p]
+		if c=="," then
+			self.p=self.p+1
+			self.skip_white_space
+		end if
+	end while
+	self.p=self.p+1
+	return r
+end function
+Json.parse_map=function
+	self.p=self.p+1
+	self.skip_white_space
+	r={}
+	while self.p<self.source_len
+		c=self.source[self.p]
+		if c=="}" then break
+		if c!="""" then
+			return null
+		end if
+		k=self.parse_string
+		self.skip_white_space
+		if self.source[self.p]!=":" then
+			return null
+		end if
+		self.p=self.p+1
+		self.skip_white_space
+		v=self.parse_element
+		r[k]=v
+		self.skip_white_space
+		c=self.source[self.p]
+		if c=="," then
+			self.p=self.p + 1
+			self.skip_white_space
+		end if
+	end while
+	self.p=self.p + 1
+	self.skip_white_space
+	return r
+end function
+Json.parse_string=function
+	self.p=self.p + 1
+	s=self.p
+	e=0
+	while self.p<self.source_len
+		c=self.source[self.p]
+		self.p=self.p+1
+		if c=="""" then break
+		if c=="\" then
+			e=1
+			self.p=self.p+1
+		end if
+	end while
+	r=self.source[s:self.p-1]
+	if e then r=self.unescape(r)
+	return r
+end function
+Json.parse_number=function
+	s = self.p
+	while self.p < self.source_len
+		c=self.source[self.p]
+		if "0123456789+-.eE".indexOf(c)==null then break
+		self.p=self.p+1
+	end while
+	r=val(self.source[s:self.p])
+	return r
+end function
+Json.list_to_JSON=function(l,c,d)
+	w=(self.eol+"  "*(d+1))*(not c)
+	p=["[",w]
+	f=1
+	for i in l
+		if not f then
+			p.push ","
+			p.push w
+		end if
+		p.push self.dump(i,c,d+1)
+		f=0
+	end for
+	if not c then p.push self.eol+"  "*d
+	p.push "]"
+	return join(p,"")
+end function
+Json.map_to_JSON=function(l,c,d)
+	w=(self.eol+"  "*(d+1))*(not c)
+	p=["{",w]
+	f=1
+	for k in l
+		if not f then
+			p.push ","
+			p.push w
+		end if
+		p.push self.dump(str(k.key))
+		p.push ":"
+		if not c then p.push " "
+		p.push self.dump(@k.value,c,d+1)
+		f=0
+	end for
+	if not c then p.push self.eol+"  "*d
+	p.push "}"
+	return join(p,"")
+end function
+
+// Converts the map into a json string
+// @param {map}
+// @return {string}
+// @example Json.dump({"key":"value"})
+Json.dump=function(json,c=1,i=0)
+	if @json isa funcRef then return ""+@json+""
+	if json == null then return "null"
+	if json == true then return "true"
+	if json == false then return "false"
+	if json isa number then return str(json)
+	if json isa string then return """"+self.escape(json)+""""
+	if json isa list then return self.list_to_JSON(json,c,i)
+	if json isa map then return self.map_to_JSON(json,c,i)
+end function
+
+// Converts the json string map
+// @param {string}
+// @return {map}
+// @example Json.loads("{""key"":""value""}")
+Json.loads=function(json)
+	p=new self
+	return p.parse(json)
+end function

@@ -1,0 +1,23 @@
+// Removes empty strings from a list
+// @param {list}
+// @return {list}
+// @example myList.clean
+// @example clean(myList)
+list.clean = function(self)
+    newList = []
+    for i in self
+        if i != "" then newList.push(i)
+    end for
+    return newList
+end function
+clean = @list.clean
+
+// Returns 1 if list has a value else return 0
+// @param {list}
+// @return {number}
+// @example if myList.hasvalue(3) then print("List has value!")
+// @example hasvalue(myList, 3)
+list.hasvalue = function(self, item)
+    return self.indexOf(item) != null
+end function
+hasvalue = @list.hasvalue

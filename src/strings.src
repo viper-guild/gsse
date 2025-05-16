@@ -1,0 +1,104 @@
+// Changes the color of a string
+// @param {map<string, function>}
+// @param {string}
+// @return {string}
+// @example myString.color("red")
+// @example color(myString, "red")
+string.color = function(self, color)
+    if color.lower == "blue" then color = "0080ff"
+    if color.lower == "yellow" then color = "ffff00"
+    if color.lower == "black" then color = "000000"
+    if color.lower == "grey" or color.lower == "gray" then color = "808080"
+    if color.lower == "white" then color = "ffffff"
+    if color.lower == "green" then color = "00ff00"
+    if color.lower == "red" then color = "ff0000"
+    return "<color=#"+color+">"+self+"</color>"
+end function
+color = @string.color
+
+// Marks a string
+// @param {map<string, function>}
+// @param {string}
+// @return {string}
+// @example myString.mark("red")
+// @example mark(myString, "red")
+string.mark = function(self, mark)
+    if mark.lower == "blue" then mark = "0080ffaa"
+    if mark.lower == "yellow" then mark = "ffff00aa"
+    if mark.lower == "black" then mark = "000000aa"
+    if mark.lower == "grey" or mark.lower == "gray" then mark = "808080aa"
+    if mark.lower == "white" then mark = "ffffffaa"
+    if mark.lower == "green" then mark = "00ff00aa"
+    if mark.lower == "red" then mark = "ff0000aa"
+    return "<mark=#"+mark+">"+self+"</mark>"
+end function
+mark = @string.mark
+
+// Makes a string bold
+// @param {map<string, function>}
+// @return {string}
+// @example myString.bold
+// @example bold(myString)
+string.bold = function(self)
+    return "<b>"+self+"</b>"
+end function
+bold = @string.bold
+
+// Underlines a string
+// @param {map<string, function>}
+// @return {string}
+// @example myString.underline
+// @example underline(myString)
+// @example myString.ul
+// @example ul(myString)
+string.underline = function(self)
+    return "<u>"+self+"</u>"
+end function
+string.ul = @string.underline
+underline = @string.underline
+ul = @string.underline
+
+// Changes the transparacy of a string
+// @param {map<string, function>}
+// @param {string}
+// @return {string}
+// @example myString.alpha("aa")
+// @example alpha(myString, "aa")
+string.alpha = function(self, alpha)
+    return "<alpha=#"+alpha+">"+self+"<alpha=#ff>"
+end function
+alpha = @string.alpha
+
+// Returns 1 if the string starts with the defined prefix else returns 0
+// @param {map<string, function>}
+// @param {string}
+// @return {number}
+// @example myString.startswith("prefix")
+// @example startswith(myString, "prefix")
+string.startswith = function(self, strstart)
+    if self[:len(strstart)] == strstart then return 1
+    return 0
+end function
+startswith = @string.startswith
+
+// Returns 1 if the string ends with the defined suffix else returns 0
+// @param {map<string, function>}
+// @param {string}
+// @return {number}
+// @example myString.endswith("suffix")
+// @example endswith(myString, "suffix")
+string.endswith = function(self, strend)
+    if self[-len(strend):] == strend then return 1
+    return 0
+end function
+endswith = @string.endswith
+
+// Strips tags from a string
+// @param {map<string, function>}
+// @return {string}
+// @example myString.tagstrip
+// @example tagstrip(myString)
+string.tagstrip = function(self)
+    return self.replace("<(.+?)[\s]*\/?[\s]*>","")
+end function
+tagstrip = @string.tagstrip

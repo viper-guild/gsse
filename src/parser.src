@@ -1,0 +1,37 @@
+// Returns a list of arguments
+// @param {string}
+// @return {list<string>}
+// @example parse_input(user_input("Terminal: "))
+parse_input = function(input)
+    command = input.matches("(?:""((?:[^""\\]|\\.)*)"")|(\S+)")
+    out = []
+    for i in command
+        i.value = i.value.replace("^[""']|[""']$", "").replace("\\""", """")
+        out.push(i.value)
+    end for
+    return out
+end function
+
+// Returns a permission list from a permission code
+// @param {string}
+// @return {list<string>}
+// @example permFormat("777")
+perm_format = function(permString)
+    if not permString.is_match("[0-7]{3}") then return 0
+
+    ugo = "ugo"
+    permList = []
+    for i in range(len(permString)-1)
+        addPerm = ugo[i]+"+"
+        rmPerm = ugo[i]+"-"
+
+        if bitwise("&",permString[i].val,4) then addPerm=addPerm+"r" else rmPerm=rmPerm+"r"
+        if bitwise("&",permString[i].val,2) then addPerm=addPerm+"w" else rmPerm=rmPerm+"w"
+        if bitwise("&",permString[i].val,1) then addPerm=addPerm+"x" else rmPerm=rmPerm+"x"
+
+        if addPerm != ugo[i]+"+" then permList.push(addPerm)
+        if rmPerm != ugo[i]+"-" then permList.push(rmPerm)
+    end for
+
+    return permList
+end function
