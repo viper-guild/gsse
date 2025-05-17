@@ -263,3 +263,46 @@ if hasvalue(myMap, "cat") then print("The cat has been found")
 ```
 </details>
 </details>
+
+
+<details>
+<summary><strong>📦 Module: <code>maps</code></strong></summary>
+<br>
+
+<details>
+<summary><strong><code>check_service(ip, service, libVersion=null)</code></strong></summary>
+<br>
+
+Searches a network for a library and returns 1 if the service is found else return 0
+
+#### **Parameters**
+- `ip` *(string)*: The ip of the network.
+- `service` *(string)*: The service that needs to be found.
+- `libVersion` *(string|null)*: The version of the library that needs to be found, default null for no specific version.
+
+#### **Returns**
+- *(number)*: 1 if the service is found else 0.
+
+#### **Example**
+```lua
+if check_service("188.211.38.42", "ssh") then print("This network has ssh!")
+if check_service("188.211.38.42", "ssh", "1.0.0") then print("This network has ssh with version 1.0.0!")
+if check_service("188.211.38.42", "kernel_router", "1.0.0") then print("This network has a kernel_router of version 1.0.0!")
+```
+</details>
+
+<details>
+<summary><strong><code>random_ip()</code></strong></summary>
+<br>
+
+Returns a random ip
+
+#### **Returns**
+- *(string)*: A random ip.
+
+#### **Example**
+```lua
+print(random_ip)
+```
+</details>
+</details>
