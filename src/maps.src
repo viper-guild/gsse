@@ -1,5 +1,5 @@
 // Returns 1 if map has a value else return 0
-// @param {map}
+// @param {map|list}
 // @return {number}
 // @example if myMap.hasvalue(3) then print("Map has value!")
 // @example hasvalue(myMap, 3)

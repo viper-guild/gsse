@@ -76,8 +76,7 @@ alpha = @string.alpha
 // @example myString.startswith("prefix")
 // @example startswith(myString, "prefix")
 string.startswith = function(self, strstart)
-    if self[:len(strstart)] == strstart then return 1
-    return 0
+    return self[:len(strstart)] == strstart
 end function
 startswith = @string.startswith
 
@@ -88,8 +87,7 @@ startswith = @string.startswith
 // @example myString.endswith("suffix")
 // @example endswith(myString, "suffix")
 string.endswith = function(self, strend)
-    if self[-len(strend):] == strend then return 1
-    return 0
+    return self[-len(strend):] == strend
 end function
 endswith = @string.endswith
 
