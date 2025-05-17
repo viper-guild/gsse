@@ -13,7 +13,7 @@ end function
 clean = @list.clean
 
 // Returns 1 if list has a value else return 0
-// @param {list}
+// @param {list|map}
 // @return {number}
 // @example if myList.hasvalue(3) then print("List has value!")
 // @example hasvalue(myList, 3)
