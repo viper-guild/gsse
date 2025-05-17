@@ -350,3 +350,179 @@ end for
 ```
 </details>
 </details>
+
+
+<details>
+<summary><strong>📦 Module: <code>strings</code></strong></summary>
+<br>
+
+<details>
+<summary><strong><code>color(string, colorCode)</code></strong></summary>
+<br>
+
+Changes the color of a string.
+
+#### **Parameters**
+- `string` *(string)*: The string that needs to be colored.
+- `colorCode` *(string)*: The color code.
+  - `blue`
+  - `yellow`
+  - `black`
+  - `grey`
+  - `gray`
+  - `white`
+  - `green`
+  - `red`
+  - `ff00ff`: Color codes like these are also compatible.
+
+#### **Returns**
+- *(string)*: The colored string.
+
+#### **Example**
+```lua
+print(color("This is red", "red"))
+print("This is blue".color("blue"))
+```
+</details>
+
+<details>
+<summary><strong><code>mark(string, colorCode)</code></strong></summary>
+<br>
+
+Marks a string.
+
+#### **Parameters**
+- `string` *(string)*: The string that needs to be marked.
+- `colorCode` *(string)*: The color code.
+  - `blue`
+  - `yellow`
+  - `black`
+  - `grey`
+  - `gray`
+  - `white`
+  - `green`
+  - `red`
+  - `ff00ffaa`: Color codes like these are also compatible.
+
+#### **Returns**
+- *(string)*: The colored string.
+
+#### **Example**
+```lua
+print(mark("This is marked in red", "red"))
+print("This is marked in blue".mark("blue"))
+```
+</details>
+
+<details>
+<summary><strong><code>bold(string)</code></strong></summary>
+<br>
+
+Turns a string into a bold string.
+
+#### **Returns**
+- *(string)*: The string in bold.
+
+#### **Example**
+```lua
+print(bold("This string is now bold"))
+print("This string is now bold".bold)
+```
+</details>
+
+<details>
+<summary><strong><code>underline(string)</code></strong></summary>
+<br>
+
+Adds an underline to a string.
+
+#### **Returns**
+- *(string)*: The string with an underline.
+
+#### **Example**
+```lua
+print(underline("This string now has an underline"))
+print("This string now has an underline".underline)
+```
+</details>
+
+<details>
+<summary><strong><code>alpha(string, alphaCode)</code></strong></summary>
+<br>
+
+Changes the transparancy of a string.
+
+#### **Parameters**
+- `string` *(string)*: The string that needs to be transparent.
+- `alphaCode` *(string)*: The transparacy code.
+  - `aa`: This is a valid transparacy code.
+
+#### **Returns**
+- *(string)*: A transparent string.
+
+#### **Example**
+```lua
+print(alpha("This string is now transparant", "aa"))
+print("This string is now transparant".mark("aa"))
+```
+</details>
+
+<details>
+<summary><strong><code>startswith(string, prefix)</code></strong></summary>
+<br>
+
+Returns 1 if the string starts with the defined prefix else returns 0.
+
+#### **Parameters**
+- `string` *(string)*: The string that needs to be checked.
+- `prefix` *(string)*: The prefix that needs to be checked.
+
+#### **Returns**
+- *(number)*: 1 if the string starts with the prefix else 0.
+
+#### **Example**
+```lua
+if myString.startswith("prefix") then print("The string starts with prefix")
+if startswith(myString, "prefix") then print("The string starts with prefix")
+```
+</details>
+
+<details>
+<summary><strong><code>endswith(string, suffix)</code></strong></summary>
+<br>
+
+Returns 1 if the string ends with the defined suffix else returns 0.
+
+#### **Parameters**
+- `string` *(string)*: The string that needs to be checked.
+- `suffix` *(string)*: The suffix that needs to be checked.
+
+#### **Returns**
+- *(number)*: 1 if the string ends with the suffix else 0.
+
+#### **Example**
+```lua
+if myString.endswith("prefix") then print("The string ends with prefix")
+if endswith(myString, "prefix") then print("The string ends with prefix")
+```
+</details>
+
+<details>
+<summary><strong><code>tagstrip(string)</code></strong></summary>
+<br>
+
+Strips richtext tags from a string.
+
+#### **Parameters**
+- `string` *(string)*: The string that needs it's richtext tags stripped.
+
+#### **Returns**
+- *(string)*: The string without richtext tags.
+
+#### **Example**
+```lua
+print(myString.tagstrip)
+print(tagstrip(myString))
+```
+</details>
+</details>
