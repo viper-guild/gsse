@@ -306,3 +306,47 @@ print(random_ip)
 ```
 </details>
 </details>
+
+
+<details>
+<summary><strong>📦 Module: <code>parser</code></strong></summary>
+<br>
+
+<details>
+<summary><strong><code>parse_input(input)</code></strong></summary>
+<br>
+
+Returns a list of arguments from the input.
+
+#### **Parameters**
+- `input` *(string)*: The input that needs to be parsed.
+
+#### **Returns**
+- *(list)*: A list of the parsed arguments.
+
+#### **Example**
+```lua
+print(parse_input(input("Terminal: ")))
+```
+</details>
+
+<details>
+<summary><strong><code>perm_format(permCode)</code></strong></summary>
+<br>
+
+Returns a list of permissions from a permission code.
+
+#### **Parameters**
+- `permCode` *(string)*: The permission code ex: 777.
+
+#### **Returns**
+- *(list)*: A list of permissions.
+
+#### **Example**
+```lua
+for perm in perm_format("777")
+  file.chmod(perm)
+end for
+```
+</details>
+</details>
