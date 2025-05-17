@@ -1,0 +1,22 @@
+Error = {"classID": "Error"}
+
+// Returns a new error
+// @param {string}
+// @return {Error}
+// @example return Error.New("Error: could not...")
+Error.New = function(message="Error: Unknown error")
+    error = new self
+    error.classID = self.classID
+    error.msg = message
+    return error
+end function
+
+// Prints the error message
+// @param {Error}
+// @return {null}
+// @example myError.Log
+// @example Error.Log(myError)
+Error.Log = function(self)
+    if not @self isa Error then return print("Error.Log: invalid object: expected an error")
+    return print(self.msg)
+end function
