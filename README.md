@@ -115,7 +115,7 @@ Gets a file object from another object.
 - `path` *(string)*: The path of the file object to obtain.
 
 #### **Returns**
-- *(object)*|*(null)*: The file object from the specified path or null on error.
+- *(object|null)*: The file object from the specified path or null on error.
 
 #### **Example**
 ```lua
@@ -221,10 +221,10 @@ print(cleanList)
 <summary><strong><code>hasvalue(myList, item)</code></strong></summary>
 <br>
 
-Returns 1 if list has a value else return 0.
+Returns 1 if the list has a value else return 0.
 
 #### **Parameters**
-- `myList` *(list)*: The list that contains the item.
+- `myList` *(list|map)*: The list that contains the item.
 - `item` *(any)*: The item that is contained in the list.
 
 #### **Returns**
@@ -234,6 +234,32 @@ Returns 1 if list has a value else return 0.
 ```lua
 if myList.hasvalue("cat") then print("The cat has been found")
 if hasvalue(myList, "cat") then print("The cat has been found")
+```
+</details>
+</details>
+
+
+<details>
+<summary><strong>📦 Module: <code>maps</code></strong></summary>
+<br>
+
+<details>
+<summary><strong><code>hasvalue(myMap, item)</code></strong></summary>
+<br>
+
+Returns 1 if the map has a value else return 0.
+
+#### **Parameters**
+- `myMap` *(map|list)*: The map that contains the item.
+- `item` *(any)*: The item that is contained in the map.
+
+#### **Returns**
+- *(number)*: 1 if the item is found else 0.
+
+#### **Example**
+```lua
+if myMap.hasvalue("cat") then print("The cat has been found")
+if hasvalue(myMap, "cat") then print("The cat has been found")
 ```
 </details>
 </details>
