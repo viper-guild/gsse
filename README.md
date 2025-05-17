@@ -266,7 +266,7 @@ if hasvalue(myMap, "cat") then print("The cat has been found")
 
 
 <details>
-<summary><strong>📦 Module: <code>maps</code></strong></summary>
+<summary><strong>📦 Module: <code>networking</code></strong></summary>
 <br>
 
 <details>
