@@ -204,7 +204,7 @@ print(json_map)
 Removes empty strings from a list.
 
 #### **Parameters**
-- `myList` *(list)*: The that needs to be cleaned.
+- `myList` *(list)*: The list that needs to be cleaned.
 
 #### **Returns**
 - *(list)*: The cleaned list.
@@ -217,4 +217,23 @@ print(cleanList)
 ```
 </details>
 
+<details>
+<summary><strong><code>hasvalue(myList, item)</code></strong></summary>
+<br>
+
+Returns 1 if list has a value else return 0.
+
+#### **Parameters**
+- `myList` *(list)*: The list that contains the item.
+- `item` *(any)*: The item that is contained in the list.
+
+#### **Returns**
+- *(number)*: 1 if the item is found else 0.
+
+#### **Example**
+```lua
+if myList.hasvalue("cat") then print("The cat has been found")
+if hasvalue(myList, "cat") then print("The cat has been found")
+```
+</details>
 </details>
