@@ -526,3 +526,44 @@ print(tagstrip(myString))
 ```
 </details>
 </details>
+
+
+<details>
+<summary><strong>📦 Module: <code>Error</code></strong></summary>
+<br>
+
+<details>
+<summary><strong><code>Error.New(message)</code></strong></summary>
+<br>
+
+Creates a new Error object.
+
+#### **Parameters**
+- `message` *(string)*: The error message.
+
+#### **Returns**
+- *(Error)*: An Error object.
+
+#### **Example**
+```lua
+return Error.New("Error: could not...")
+if Error.New("Error: could not...") isa Error then print("isa works to verify errors")
+```
+</details>
+
+<details>
+<summary><strong><code>Error.Log(self)</code></strong></summary>
+<br>
+
+Prints the error message associated with the Error object.
+
+#### **Parameters**
+- `self` *(Error)*: The error that you want to print to the screen.
+
+#### **Example**
+```lua
+Error.Log(myError)
+myError.Log
+```
+</details>
+</details>
