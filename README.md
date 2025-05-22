@@ -566,24 +566,6 @@ printf("Name: {}", [name])
 </details>
 
 <details>
-<summary><strong><code>format_table(csv)</code></strong></summary>
-<br>
-
-Formats a string in a table format.
-
-#### **Parameters**
-- `csv` *(string)*: Csv that needs to be formatted to a table.
-
-#### **Returns**
-- *(string)*: The formatted table.
-
-#### **Example**
-```lua
-print(format_table("#,username,password\n0,admin,s3cure!\n1,user,welcome123"))
-```
-</details>
-
-<details>
 <summary><strong><code>printf(string, params)</code></strong></summary>
 <br>
 
@@ -599,6 +581,24 @@ Prints a formatted string that includes the params.
 #### **Example**
 ```lua
 printf("Name: {}", [name])
+```
+</details>
+
+<details>
+<summary><strong><code>format_table(csv)</code></strong></summary>
+<br>
+
+Formats a string in a table format.
+
+#### **Parameters**
+- `csv` *(string)*: Csv that needs to be formatted to a table.
+
+#### **Returns**
+- *(string)*: The formatted table.
+
+#### **Example**
+```lua
+print(format_table("#,username,password\n0,admin,s3cure!\n1,user,welcome123"))
 ```
 </details>
 </details>
