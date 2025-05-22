@@ -129,3 +129,56 @@ format = @string.format
 printf = function(s, params)
 	print(s.format(params))
 end function
+
+// Returns a table formatted string
+// @param {string}
+// @return {string}
+// @example print(format_table("#,username,password\n0,admin,s3cure!\n1,user,welcome123"))
+format_table = function(csv)
+	t = "-"
+	s = "|"
+	c = "+"
+
+	csv_parts = csv.split("\\n")
+	headers = csv_parts[0]
+	data = csv_parts[1:]
+	
+	ltable = []
+	for header in headers.split(",")
+		ltable.push(len(header))
+	end for
+	
+	for row in data
+		index = 0
+		for column in row.split(",")
+			if len(column) > ltable[index] then ltable[index] = len(column)
+			index = index+1
+		end for
+	end for
+
+	top_line = c
+	for i in ltable
+		top_line = top_line+t*(i+2)+c
+	end for
+	
+	out = top_line+"\n"
+	
+	index = 0
+	for header in headers.split(",")
+		out = out+s+" "+header+(" "*(1+ltable[index]-len(header)))
+		index = index+1
+	end for
+	out = out+"|\n"+top_line+"\n"
+	
+	for row in data
+		index = 0
+		for column in row.split(",")
+			out = out+s+" "+column+(" "*(1+ltable[index]-len(column)))
+			index = index+1
+		end for
+		out = out+"|\n"
+	end for
+	out = out+top_line
+	
+	return out
+end function
