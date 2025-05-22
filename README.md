@@ -525,6 +525,45 @@ print(myString.tagstrip)
 print(tagstrip(myString))
 ```
 </details>
+
+<details>
+<summary><strong><code>format(string, params)</code></strong></summary>
+<br>
+
+Formats a string to include the params.
+
+#### **Parameters**
+- `string` *(string)*: The string that needs to be formatted.
+- `params` *(list)*: A list with parameters that need to be included into the string.
+
+#### **Returns**
+- *(string|null)*: The formatted string to include the params. Or null when something went wrong.
+
+#### **Example**
+```lua
+myString.format([name])
+format("Name: {}", [name])
+```
+</details>
+
+<details>
+<summary><strong><code>printf(string, params)</code></strong></summary>
+<br>
+
+Prints a formatted string that includes the params.
+
+#### **Parameters**
+- `string` *(string)*: The string that needs to be formatted.
+- `params` *(list)*: A list with parameters that need to be included into the string.
+
+#### **Returns**
+- *(null)*: This returns nothing.
+
+#### **Example**
+```lua
+printf("Name: {}", [name])
+```
+</details>
 </details>
 
 

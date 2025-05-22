@@ -100,3 +100,32 @@ string.tagstrip = function(self)
     return self.replace("<(.+?)[\s]*\/?[\s]*>","")
 end function
 tagstrip = @string.tagstrip
+
+// Formats a string
+// @param {string}
+// @param {list}
+// @return {string|null}
+// @example myString.format([name])
+// @example format("Name: {}", [name])
+string.format = function(self, params)
+	str_parts = self.split("{}")
+	if len(str_parts)-1 != len(params) then return
+	out = ""
+	c = 0
+	for part in str_parts
+		out = out+part
+		if c < len(params) then out = out+str(params[c])
+		c = c+1
+	end for	
+	return out
+end function
+format = @string.format
+
+// Prints and formats a string
+// @param {string}
+// @param {list}
+// @return {null}
+// @example printf("Name: {}", [name])
+printf = function(s, params)
+	print(s.format(params))
+end function
