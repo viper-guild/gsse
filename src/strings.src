@@ -148,7 +148,7 @@ format_table = function(csv)
 	s = "|"
 	c = "+"
 
-	csv_parts = csv.split("\\n")
+	csv_parts = csv.split(char(10))
 	headers = csv_parts[0]
 	data = csv_parts[1:]
 	
