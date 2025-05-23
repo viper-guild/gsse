@@ -965,16 +965,79 @@ return "<alpha=#"+alpha+">"+self+"<alpha=#ff>"
 end function
 alpha=@string.alpha
 string.startswith=function(self,strstart)
-if self[:len(strstart)]==strstart then return 1
-return 0
+return self[:len(strstart)]==strstart
 end function
 startswith=@string.startswith
 string.endswith=function(self,strend)
-if self[-len(strend):]==strend then return 1
-return 0
+return self[-len(strend):]==strend
 end function
 endswith=@string.endswith
 string.tagstrip=function(self)
 return self.replace("<(.+?)[\s]*\/?[\s]*>","")
 end function
 tagstrip=@string.tagstrip
+string.format=function(self,params)
+str_parts=self.split("{}")
+if len(str_parts)-1!=len(params) then return 
+out=""
+c=0
+for part in str_parts
+out=out+part
+if c<len(params) then out=out+str(params[c])
+c=c+1
+end for
+return out
+end function
+format=@string.format
+printf=function(s,params)
+str_parts=s.split("{}")
+if len(str_parts)-1!=len(params) then return 
+out=""
+c=0
+for part in str_parts
+out=out+part
+if c<len(params) then out=out+str(params[c])
+c=c+1
+end for
+print(out)
+end function
+format_table=function(csv)
+t="-"
+s="|"
+c="+"
+csv_parts=csv.split("\\n")
+headers=csv_parts[0]
+data=csv_parts[1:]
+ltable=[]
+for header in headers.split(",")
+ltable.push(len(header))
+end for
+for row in data
+index=0
+for column in row.split(",")
+if len(column)>ltable[index] then ltable[index]=len(column)
+index=index+1
+end for
+end for
+top_line=c
+for i in ltable
+top_line=top_line+t*(i+2)+c
+end for
+out=top_line+"\n"
+index=0
+for header in headers.split(",")
+out=out+s+" "+header+(" "*(1+ltable[index]-len(header)))
+index=index+1
+end for
+out=out+"|\n"+top_line+"\n"
+for row in data
+index=0
+for column in row.split(",")
+out=out+s+" "+column+(" "*(1+ltable[index]-len(column)))
+index=index+1
+end for
+out=out+"|\n"
+end for
+out=out+top_line
+return out
+end function
