@@ -1,0 +1,80 @@
+Datetime = {}
+Datetime.start_year = 2000
+Datetime.now = function()
+	return current_date
+end function
+Datetime.parse = function(date=null)
+	if not date then date = self.now
+	return {"m": date.split(":")[1], "h": date.split(":")[0].split(" - ")[1], "d": date.split("/")[0], "M": date.split("/")[1], "y": date.split("/")[2].split(" - ")[0]}
+end function
+Datetime.is_leap = function(year)
+	return (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
+end function
+Datetime.epoch = function(date=null)
+	if not date then date = self.now
+	parsed_date = self.parse(date)
+	month_map = {"Jan":1,"Feb":2,"Mar":3,"Apr":4,"May":5,"Jun":6,"Jul":7,"Aug":8,"Sep":9,"Okt":10,"Nov":11,"Dec":12}
+	
+	year = to_int(parsed_date.y)
+	month = month_map[parsed_date.M]
+	day = to_int(parsed_date.d)
+	hour = to_int(parsed_date.h)
+	minute = to_int(parsed_date.m)
+	
+	month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+	if self.is_leap(year) then month_days = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+	
+	total_minutes = 0
+	for y in range(year, self.start_year)
+		if y == year then continue
+		if self.is_leap(y) then
+			total_minutes = total_minutes+366*1440
+		else
+			total_minutes = total_minutes+365*1440
+		end if
+	end for
+	
+	for m in month_days[:month-1]
+		total_minutes = total_minutes+m*1440
+	end for
+
+	total_minutes = total_minutes+(day-1)*1440
+	total_minutes = total_minutes+hour*60
+	total_minutes = total_minutes+minute
+	
+	return total_minutes
+end function
+Datetime.from_epoch = function(epoch)
+	days = floor(epoch/1440)
+	epoch = epoch-days*1440
+	hours = floor(epoch/60)
+	epoch = epoch-hours*60
+	minutes = epoch
+	
+	year = self.start_year
+	year_minutes = 365*1440
+	month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+	if self.is_leap(year) then
+		month_days = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+		year_minutes = 366*1440
+	end if
+
+	month = 0
+	while days >= month_days[month]
+		days = days-month_days[month]
+		month = month+1
+		if month >= len(month_days) then
+			month = 0
+			year = year+1
+			month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+			if self.is_leap(year) then month_days = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+		end if
+	end while
+	
+	days = days+1
+	if hours < 10 then hours = "0"+hours
+	if minutes < 10 then minutes = "0"+minutes
+	
+	months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Okt","Nov","Dec"]
+	return str(days)+"/"+months[month]+"/"+str(year)+" - "+str(hours)+":"+str(minutes)
+end function

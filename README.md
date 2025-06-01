@@ -624,3 +624,59 @@ myError.Log
 ```
 </details>
 </details>
+
+
+<details>
+<summary><strong>📦 Module: <code>Datetime</code></strong></summary>
+<br>
+<details>
+<summary><strong><code>Datetime.Now()</code></strong></summary>
+<br>
+
+Returns the current date and time.
+
+#### **Returns**
+- *(string)*: The current date and time.
+
+#### **Example**
+```lua
+print(Datetime.now)
+```
+</details>
+
+<details>
+<summary><strong><code>Datetime.epoch(date)</code></strong></summary>
+<br>
+
+Returns the epoch timestamp.
+
+#### **Parameters**
+- `date` *(string)*: The date to be converted into epoch timestamp.
+
+#### **Returns**
+- *(string)*: The epoch timestamp.
+
+#### **Example**
+```lua
+print(Datetime.epoch("1/Jan/2000 - 00:00"))
+```
+</details>
+
+<details>
+<summary><strong><code>Datetime.from_epoch(epoch)</code></strong></summary>
+<br>
+
+Returns the date and time from an epoch timestamp.
+
+#### **Parameters**
+- `epoch` *(string)*: The epoch timestamp to be converted into a date and time.
+
+#### **Returns**
+- *(string)*: The data and time from an epoch timestamp.
+
+#### **Example**
+```lua
+print(Datetime.from_epoch(64579))
+```
+</details>
+</details>
